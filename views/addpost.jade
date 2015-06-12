@@ -1,1 +1,33 @@
-addpost.jade
+extends layout
+
+block content
+	h1=title
+	ul.errors
+		if errors
+			each error, i in errors
+				li.alert.alert-danger #{error.msg}
+	form(method='post', action='/posts/add', enctype='multipart/form-data')
+		.form-group
+			label Title:
+			input.form-control(name='title', type='text')
+		.form-group
+			label Category:
+			select.form-control(name='category')
+				each category, i in categories
+					option(value='#{category.title}') #{category.title}
+		.form-group
+			label Body:
+			textarea.form-control(name='body', id='body')
+		.form-group
+			label Main Image:
+			input.form-control(name='mainimage', type='file')
+		.form-group
+			label Author:
+			select.form-control(name='author')
+				option(value='Said Maadan') Said Maadan
+				option(value='Mauricio Jesse') Mauricio Jesse
+				option(value='Muller Charles') Muller Charles
+		input.btn.btn-default(name='submit',type='submit', value='Save')
+		<script src="//cdn.ckeditor.com/4.4.7/standard/ckeditor.js"></script>
+		script
+			| CKEDITOR.replace('body');

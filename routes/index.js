@@ -6,11 +6,11 @@ var db = require('monk')('localhost/blogspace');
 /* Blog Posts. */
 router.get('/', function(req, res, next) {
 	var db = req.db;
-	var posts = dg.get('posts');
+	var posts = db.get('posts');
 	posts.find({},{}, function(err, posts){
 		res.render('index', { 
 			title: 'Blogs',
-			'posts':posts 
+		  'posts':posts 
 		});
 	});
   
