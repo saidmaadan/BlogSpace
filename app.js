@@ -15,15 +15,24 @@ var flash = require('connect-flash');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var posts = require('./routes/posts');
+var categories = require('./routes/categories');
 
 var app = express();
+
+app.locals.moment = require('moment');
+
+app.locals.truncate = function(text, length){
+  var truncated = text.substring(0, length);
+  return truncated;
+}
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 //handles file uploads
-app.use(multer({dest:'/uploads'}));
+app.use(multer({dest:'./public/uploads'}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -79,6 +88,8 @@ app.use(function(req,res,next){
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/posts', posts);
+app.use('/categories', categories);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
