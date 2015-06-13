@@ -2,21 +2,22 @@ extends layout
 
 block content
 	.row
-		.col-md-9
+		.col-sm-9
 			if posts
 				each post, i in posts		
 					.row
-						.col-md-3 
+						.col-sm-3 
 							.home 
 								img(src='/uploads/#{post.mainimage}')
-						.col-md-9
+						.col-sm-9
 							h1 
 							a(href='/posts/show/#{post._id}')=post.title
-							p Posted in a(href='/categories/show/#{post.category}') #{post.category} by #{post.author} on #{moment(post.date).format('MM-DD-YYYY')}
+							p Posted in 
+								a(href='/categories/show/#{post.category}') #{post.category} by #{post.author} on #{moment(post.date).format('MM-DD-YYYY')}
 							
 							!=truncate(post.body, 300)
 							a.more(href='/posts/show/#{post._id}') Read More
-		.col-md-3
+		.col-sm-3
 			h1 latest Posts
 				if posts
 				each post, i in posts		
