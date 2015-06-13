@@ -3,8 +3,19 @@ var router = express.Router();
 var mongo = require('mongodb');
 var db = require('monk')('localhost/blogspace');
 
+router.get('/show/:id', function(req, res, next){
+	// var db = req.db;
+	var posts = db.get('posts');
+	posts.findById(req.params.id,{}, function(err, post){
+		res.render('show',{
+			"post": post
+		});
+	});
+});
+
 router.get('/add', function(req, res, next){
 	var categories = db.get('categories');
+	
 
 	categories.find({},{}, function(err, categories){
 		res.render('addpost',{
@@ -12,9 +23,12 @@ router.get('/add', function(req, res, next){
 			"categories": categories
 		});
 	});
+
+
 });
 
 router.post('/add', function(req, res, next){
+	
 	// Get Form Values
 	var title 		= req.body.title;
 	var category 	= req.body.category;
@@ -67,6 +81,7 @@ router.post('/add', function(req, res, next){
 			}
 		});
 	}
+
 });
 
 module.exports = router;

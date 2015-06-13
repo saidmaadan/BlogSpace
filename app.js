@@ -8,10 +8,10 @@ var session = require('express-session');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy; 
 var bodyParser = require('body-parser');
-var mongo = require('mongodb');
-var db =require('monk')('localhost/blogspace');
 var multer = require('multer');
 var flash = require('connect-flash');
+var mongo = require('mongodb');
+var db =require('monk')('localhost/blogspace');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
